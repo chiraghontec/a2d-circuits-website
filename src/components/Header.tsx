@@ -6,10 +6,10 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="absolute top-0 left-0 right-0 p-8 z-50">
+    <nav className="absolute top-0 left-0 right-0  z-50 bg-white px-8">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center gap-3">
-          <div className="relative h-10 w-10">
+          <div className="relative h-16 w-16  ">
             <Image
               src="/a2d-logo.png"
               alt="a2d Circuits Logo"
@@ -18,39 +18,37 @@ export default function Header() {
               priority
             />
           </div>
-          <span className="text-2xl font-bold tracking-wider text-white">
-            a2d Circuits
-          </span>
+          
         </Link>
         
         <div className="hidden md:flex items-center gap-8">
           <Link
             href="/products"
-            className="hover:text-[var(--color-primary)] transition-colors text-white"
+            className="hover:text-[var(--color-primary)] transition-colors text-black"
           >
             Products
           </Link>
           <Link
             href="/about"
-            className="hover:text-[var(--color-primary)] transition-colors text-white"
+            className="hover:text-[var(--color-primary)] transition-colors text-black"
           >
             About Us
           </Link>
           <Link
             href="/contact"
-            className="hover:text-[var(--color-primary)] transition-colors text-white"
+            className="hover:text-[var(--color-primary)] transition-colors text-black"
           >
             Contact
           </Link>
         </div>
         
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-black"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <svg
             className="h-6 w-6"
-            fill="none"
+            fill="black"
             stroke="currentColor"
             strokeWidth="1.5"
             viewBox="0 0 24 24"

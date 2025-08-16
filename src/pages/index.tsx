@@ -1,30 +1,40 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <>
-      <Head>
+      <div>
         <title>a2d Circuits - Reviving Rare Circuits, Powering Innovation</title>
         <meta
           name="description"
           content="We specialize in unique and obsolete electronic circuit components, fueling the future of technology."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+      </div>
 
       {/* Hero Section */}
-      <header className="relative h-screen min-h-[600px] text-white">
+      <header className="relative h-full min-h-[650px] text-white sm:pt-4 pt-20">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center blur-[2px] "
           style={{
-            backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8Agz_pEY1X9B7onZoHwUap6KGPYQFiRvIZG5sI-CTVWClBwrPY59OtTPrq_Bpx20CZLFUrWWmIskAIrC9kqGDauBzQOuAOh-hvJy2MV4VZ-NzNfBT01r4au9JfcQMPHQXvhAEOOrSMU94GqtxvfZDxOF7cFF100NuhtxswWc-fpzdzJBuN-HAt5GrPxnsT_13511ReP2NExmP4cykoXmE5mZgq4aWuQGH6l7w89UchDh8RB_to2e9voW7PW_RAHyjuqYbuiIWRhQ")`,
+            backgroundImage: `url("./circuit-bg.jpg")`,
           }}
         />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col">
           <div className="flex-grow flex items-center justify-center text-center">
             <div className="max-w-3xl px-4">
+              <div className="relative sm:h-[300px] sm:w-[300px] h-32 w-32 mx-auto sm:-mb-20 -mb-8">
+                <Image
+                  src="/a2d-logo.png"
+                  alt="a2d Circuits Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight tracking-wide uppercase">
                 Reviving Rare Circuits,{' '}
                 <span className="text-[var(--color-primary)]">
