@@ -1,9 +1,12 @@
 from ninja import Router, Schema
 from ninja.security import HttpBearer
 from django.shortcuts import get_object_or_404
+from django.utils.html import escape
+from django.core.exceptions import ValidationError
 from .models import Product
 from .auth_api import auth
 from typing import List, Optional
+from pydantic import validator
 
 class ProductSchema(Schema):
     id: int
@@ -27,10 +30,50 @@ class ProductCreateSchema(Schema):
     description: str
     price: float
 
+    @validator('name')
+    def validate_name(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Name cannot be empty')
+        if len(v.strip()) > 255:
+            raise ValueError('Name too long (max 255 characters)')
+        return v
+    
+    @validator('description')
+    def validate_description(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Description cannot be empty')
+        return v
+    
+    @validator('price')
+    def validate_price(cls, v):
+        if v <= 0:
+            raise ValueError('Price must be positive')
+        if v > 999999.99:
+            raise ValueError('Price too high')
+        return v
+
 class ProductUpdateSchema(Schema):
     name: Optional[str] = None
     description: Optional[str] = None
     price: Optional[float] = None
+
+    @validator('name')
+    def validate_name(cls, v):
+        if v is not None:
+            if not v.strip():
+                raise ValueError('Name cannot be empty')
+            if len(v.strip()) > 255:
+                raise ValueError('Name too long (max 255 characters)')
+        return v
+    
+    @validator('price')
+    def validate_price(cls, v):
+        if v is not None:
+            if v <= 0:
+                raise ValueError('Price must be positive')
+            if v > 999999.99:
+                raise ValueError('Price too high')
+        return v
 
 router = Router()
 
@@ -48,9 +91,13 @@ def get_product(request, product_id: int):
 @router.post("/products", auth=auth, response=ProductSchema)
 def create_product(request, payload: ProductCreateSchema):
     """Create a new product - admin only"""
+    # Sanitize inputs to prevent XSS
+    name = escape(payload.name.strip())
+    description = escape(payload.description.strip())
+    
     product = Product.objects.create(
-        name=payload.name,
-        description=payload.description,
+        name=name,
+        description=description,
         price=payload.price
     )
     return ProductSchema.from_orm(product)
@@ -61,9 +108,9 @@ def update_product(request, product_id: int, payload: ProductUpdateSchema):
     product = get_object_or_404(Product, id=product_id)
     
     if payload.name is not None:
-        product.name = payload.name
+        product.name = escape(payload.name.strip())
     if payload.description is not None:
-        product.description = payload.description
+        product.description = escape(payload.description.strip())
     if payload.price is not None:
         product.price = payload.price
     
