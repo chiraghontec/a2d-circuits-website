@@ -48,6 +48,8 @@ A2D Circuits website is a modern, high-performance web application showcasing el
 | Route | Component | Description |
 |-------|-----------|-------------|
 | `/` | `index.tsx` | Landing page with hero, featured products, and contact |
+| `/product/[id]` | `product/[id].tsx` | Dynamic product detail pages |
+| `/product-example` | `product-example.tsx` | Demo product page template |
 | `/products` | `products.tsx` | Product catalog with search and filtering |
 | `/about` | `about.tsx` | Company information, team, and timeline |
 | `/contact` | `contact.tsx` | Contact form and business information |
