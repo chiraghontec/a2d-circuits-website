@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ProductImage {
   src: string;
@@ -25,7 +25,11 @@ const ProductPage: React.FC<ProductPageProps> = ({
   onInquiry,
 }) => {
   return (
-    <main className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8" itemScope itemType="http://schema.org/Product">
+    <main
+      className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8"
+      itemScope
+      itemType="http://schema.org/Product"
+    >
       <div className="flex flex-col md:flex-row gap-8">
         {/* Image Gallery */}
         <section className="flex-1" aria-label="Product images">
@@ -38,7 +42,10 @@ const ProductPage: React.FC<ProductPageProps> = ({
               itemProp="image"
             />
           </div>
-          <div className="flex gap-2 overflow-x-auto" aria-label="Product thumbnails">
+          <div
+            className="flex gap-2 overflow-x-auto"
+            aria-label="Product thumbnails"
+          >
             {images.map((img, idx) => (
               <img
                 key={idx}
@@ -52,17 +59,43 @@ const ProductPage: React.FC<ProductPageProps> = ({
           </div>
         </section>
         {/* Product Info */}
-        <section className="flex-1 flex flex-col justify-between" aria-label="Product information">
+        <section
+          className="flex-1 flex flex-col justify-between"
+          aria-label="Product information"
+        >
           <div>
-            <h1 className="text-3xl font-bold mb-2" itemProp="name">{name}</h1>
-            <p className="text-gray-500 mb-2" itemProp="model">Model: {model}</p>
-            <p className="text-lg text-gray-700 mb-4" itemProp="description">{description}</p>
+            <h1 className="text-3xl font-bold mb-2" itemProp="name">
+              {name}
+            </h1>
+            <p className="text-gray-500 mb-2" itemProp="model">
+              Model: {model}
+            </p>
+            <p className="text-lg text-gray-700 mb-4" itemProp="description">
+              {description}
+            </p>
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-2xl font-semibold text-green-600" itemProp="offers" itemScope itemType="http://schema.org/Offer">
+              <span
+                className="text-2xl font-semibold text-green-600"
+                itemProp="offers"
+                itemScope
+                itemType="http://schema.org/Offer"
+              >
                 <meta itemProp="priceCurrency" content="USD" />
                 <span itemProp="price">{price}</span>
               </span>
-              <span className={`px-2 py-1 rounded text-sm ${availability === 'In Stock' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`} itemProp="availability" content={availability === 'In Stock' ? 'http://schema.org/InStock' : 'http://schema.org/OutOfStock'}>
+              <span
+                className={`px-2 py-1 rounded text-sm ${
+                  availability === "In Stock"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                }`}
+                itemProp="availability"
+                content={
+                  availability === "In Stock"
+                    ? "http://schema.org/InStock"
+                    : "http://schema.org/OutOfStock"
+                }
+              >
                 {availability}
               </span>
             </div>
