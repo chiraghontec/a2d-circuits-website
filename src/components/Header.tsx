@@ -1,96 +1,90 @@
 import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import SearchOverlay from "./SearchPanel";
+import { Search, ShoppingCart, Heart, Phone, User } from "lucide-react";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+const [searchOpen, setSearchOpen] = useState(false);
+
+  const router = useRouter();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push(`/products?search=${query}`);
+  };
 
   return (
-    <nav className="absolute top-0 left-0 right-0  z-50 bg-white px-8">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="relative h-16 w-48  ">
-            <Image
-              src="/a2d-logo.png"
-              alt="a2d Circuits Logo"
-              width={500}
-              height={200}
-              className="object-contain -mt-12 -ml-8"
-              priority
-            />
-          </div>
+    <header className="fixed top-0 z-50 w-full bg-white shadow-sm">
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-6 py-3 border-b">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 text-xl font-bold">
+          <span className="text-[var(--color-primary)]">a2d</span>
+          <span>Circuits</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
-          <Link
-            href="/products"
-            className="hover:text-[var(--color-primary)] transition-colors text-black"
-          >
-            Products
+        {/* Search */}
+        <form
+          onSubmit={handleSearch}
+          className="flex w-full max-w-xl overflow-hidden rounded-full border bg-gray-50"
+        >
+          <input
+            type="text"
+            placeholder="Search for products..."
+            className="flex-1 bg-transparent px-4 py-2 outline-none"
+          
+            value={searchTerm}
+onFocus={() => setSearchOpen(true)}
+
+
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          {searchOpen && (
+  <SearchOverlay
+    setSearchTerm={setSearchTerm}
+    onClose={() => setSearchOpen(false)}
+  />
+)}
+
+          <button className="bg-[var(--color-primary)] px-5 text-white">
+            <Search size={18} />
+          </button>
+        </form>
+
+        {/* Icons */}
+        <div className="flex items-center gap-6 text-gray-700">
+          <Link href="/login" className="flex items-center gap-1 hover:text-black">
+            <User size={18} /> Login
           </Link>
-          <Link
-            href="/about"
-            className="hover:text-[var(--color-primary)] transition-colors text-black"
-          >
-            About Us
+
+          <Link href="/cart" className="flex items-center gap-1 hover:text-black">
+            <ShoppingCart size={18} /> Cart
           </Link>
-          <Link
-            href="/contact"
-            className="hover:text-[var(--color-primary)] transition-colors text-black"
-          >
-            Contact
+
+          <Link href="/saved" className="flex items-center gap-1 hover:text-black">
+            <Heart size={18} /> Saved
+          </Link>
+
+          <Link href="/contact" className="flex items-center gap-1 hover:text-black">
+            <Phone size={18} /> Contact
           </Link>
         </div>
-
-        <button
-          className="md:hidden text-black"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg
-            className="h-6 w-6"
-            fill="black"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-black/90 backdrop-blur-sm">
-          <div className="container mx-auto px-8 py-4 flex flex-col gap-4">
-            <Link
-              href="/products"
-              className="hover:text-[var(--color-primary)] transition-colors text-white"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Products
-            </Link>
-            <Link
-              href="/about"
-              className="hover:text-[var(--color-primary)] transition-colors text-white"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About Us
-            </Link>
-            <Link
-              href="/contact"
-              className="hover:text-[var(--color-primary)] transition-colors text-white"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </Link>
-          </div>
-        </div>
-      )}
-    </nav>
+      {/* Navigation */}
+      <nav className="flex gap-10 px-6 py-3 text-[15px] font-medium text-gray-700">
+        <Link href="/products" className="hover:text-black">
+          All Products
+        </Link>
+        <Link href="#">Microcontroller</Link>
+        <Link href="#">Sensors</Link>
+        <Link href="#">RC</Link>
+        <Link href="#">Cooling Fans</Link>
+        <Link href="#">Motors</Link>
+      </nav>
+    </header>
   );
 }
