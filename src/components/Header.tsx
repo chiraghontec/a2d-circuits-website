@@ -21,7 +21,7 @@ const [searchOpen, setSearchOpen] = useState(false);
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-3 border-b">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 text-xl font-bold">
+        <Link href="/" className="flex items-center gap-2 text-xl font-bold mt-5">
           <span className="text-[var(--color-primary)]">a2d</span>
           <span>Circuits</span>
         </Link>
@@ -29,7 +29,7 @@ const [searchOpen, setSearchOpen] = useState(false);
         {/* Search */}
         <form
           onSubmit={handleSearch}
-          className="flex w-full max-w-xl overflow-hidden rounded-full border bg-gray-50"
+          className="flex w-full max-w-xl overflow-hidden border bg-gray-50 mt-5"
         >
           <input
             type="text"
@@ -55,7 +55,7 @@ onFocus={() => setSearchOpen(true)}
         </form>
 
         {/* Icons */}
-        <div className="flex items-center gap-6 text-gray-700">
+        <div className="flex items-center gap-6 text-gray-700 mt-5">
           <Link href="/login" className="flex items-center gap-1 hover:text-black">
             <User size={18} /> Login
           </Link>
@@ -64,7 +64,7 @@ onFocus={() => setSearchOpen(true)}
             <ShoppingCart size={18} /> Cart
           </Link>
 
-          <Link href="/saved" className="flex items-center gap-1 hover:text-black">
+          <Link href="/wishlist" className="flex items-center gap-1 hover:text-black">
             <Heart size={18} /> Saved
           </Link>
 
@@ -75,7 +75,7 @@ onFocus={() => setSearchOpen(true)}
       </div>
 
       {/* Navigation */}
-      <nav className="flex gap-10 px-6 py-3 text-[15px] font-medium text-gray-700">
+      <nav className="flex gap-10 px-6 py-3 text-[15px] font-medium text-gray-700 mt-2">
         <Link href="/products" className="hover:text-black">
           All Products
         </Link>

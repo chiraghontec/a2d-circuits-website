@@ -1,4 +1,34 @@
 import Header from "@/components/Header";
+import Image from "next/image";
+
+const categories = [
+  { name: "Microcontroller", image: "/rspro.jpg" },
+  { name: "Sensors", image: "/IR Sensor.jpg" },
+  { name: "RC", image: "/dcbrush.jpg" },
+  { name: "Cooling Fans", image: "/SanAce 120L Fan.png" },
+  { name: "Motors", image: "/NBM DC Fan.png" },
+];
+
+const products = [
+  {
+    id: 1,
+    name: "W1209 Digital Temperature Controller Module",
+    price: "Rs. 84.96",
+    image: "/rspro.jpg",
+  },
+  {
+    id: 2,
+    name: "W1209 Digital Temperature Controller Module",
+    price: "Rs. 84.96",
+    image: "/dcbrush.jpg",
+  },
+  {
+    id: 3,
+    name: "W1209 Digital Temperature Controller Module",
+    price: "Rs. 84.96",
+    image: "/fire alarm.jpg",
+  },
+];
 
 export default function Home() {
   return (
@@ -6,16 +36,23 @@ export default function Home() {
       <Header />
 
       <main className="pt-36">
-
         {/* ================= CATEGORIES ================= */}
         <section className="text-center py-12">
           <h2 className="text-2xl font-semibold mb-6">Categories</h2>
 
-          <div className="flex justify-center gap-10">
-            {["Microcontroller", "Sensors", "RC", "Cooling Fans", "Motors"].map((cat) => (
-              <div key={cat} className="flex flex-col items-center gap-2">
-                <div className="h-20 w-20 rounded-full bg-gray-200 shadow" />
-                <p className="text-sm">{cat}</p>
+          <div className="flex flex-wrap justify-center gap-10">
+            {categories.map((cat) => (
+              <div key={cat.name} className="flex flex-col items-center gap-2">
+                <div className="h-20 w-20 rounded-full overflow-hidden shadow">
+                  <Image
+                    src={cat.image}
+                    alt={cat.name}
+                    width={80}
+                    height={80}
+                    className="object-cover"
+                  />
+                </div>
+                <p className="text-sm">{cat.name}</p>
               </div>
             ))}
           </div>
@@ -28,12 +65,14 @@ export default function Home() {
           </h2>
 
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-
             {/* Filters */}
-            <aside className="bg-white p-4 rounded-lg shadow">
+            <aside className="bg-white p-4 rounded-lg shadow h-fit">
               <h3 className="font-semibold mb-3">Filters</h3>
               {["Type A", "Type B", "Type C", "Type D"].map((type) => (
-                <label key={type} className="flex items-center gap-2 text-sm mb-2">
+                <label
+                  key={type}
+                  className="flex items-center gap-2 text-sm mb-2"
+                >
                   <input type="checkbox" />
                   {type}
                 </label>
@@ -47,19 +86,28 @@ export default function Home() {
                   <h3 className="font-semibold mb-4">{type}</h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {[1, 2, 3].map((p) => (
+                    {products.map((product) => (
                       <div
-                        key={p}
-                        className="bg-white p-4 rounded-lg shadow flex flex-col items-center"
+                        key={product.id}
+                        className="bg-white p-4 rounded-lg shadow flex flex-col items-center hover:shadow-lg transition"
                       >
-                        <div className="h-32 w-full bg-gray-200 mb-3" />
+                        <div className="relative h-32 w-full mb-3">
+                          <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
+
                         <p className="text-sm text-center">
-                          W1209 Digital Temperature Controller Module
+                          {product.name}
                         </p>
                         <p className="text-orange-500 font-semibold mt-2">
-                          Rs. 84.96
+                          {product.price}
                         </p>
-                        <button className="mt-3 bg-orange-500 text-white text-sm px-4 py-1 rounded">
+
+                        <button className="mt-3 bg-orange-500 text-white text-sm px-4 py-1 rounded hover:bg-orange-600">
                           Add to cart
                         </button>
                       </div>
@@ -73,7 +121,9 @@ export default function Home() {
 
         {/* ================= ABOUT ================= */}
         <section className="py-16 text-center px-6">
-          <h2 className="text-2xl font-semibold text-orange-500 mb-2">About Us</h2>
+          <h2 className="text-2xl font-semibold text-orange-500 mb-2">
+            About Us
+          </h2>
           <h3 className="font-semibold mb-4">Sub Heading</h3>
           <p className="max-w-3xl mx-auto text-sm text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga aut
@@ -81,35 +131,6 @@ export default function Home() {
             architecto, officiis eveniet nulla.
           </p>
         </section>
-
-        {/* ================= FOOTER ================= */}
-        <footer className="bg-slate-800 text-white py-10 px-6">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
-
-            <div>
-              <h4 className="font-semibold mb-3">Shop</h4>
-              <p>Link one</p><p>Link two</p><p>Link three</p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-3">Quick Links</h4>
-              <p>Link one</p><p>Link two</p><p>Link three</p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-3">Other Links</h4>
-              <p>Link one</p><p>Link two</p><p>Link three</p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-3">Contact Details</h4>
-              <p>📞 +91 9876543210</p>
-              <p>📧 info@a2dcircuits.com</p>
-            </div>
-
-          </div>
-        </footer>
-
       </main>
     </>
   );

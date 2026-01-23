@@ -59,7 +59,8 @@ module.exports = {
   			inter: [
   				'Inter',
   				'sans-serif'
-  			]
+  			],
+			 poppins: ["var(--font-poppins)"]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

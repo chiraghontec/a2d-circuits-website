@@ -13,7 +13,7 @@ const products = Array.from({ length: 9 }, (_, i) => ({
   id: i,
   name: "W1209 Digital Temperature Controller Thermostat Module",
   price: "Rs. 84.96",
-  img: "/products/w1209.png",
+  img: "/rspro.jpg",
 }));
 
 export default function Products() {
@@ -29,7 +29,7 @@ export default function Products() {
       <div className="min-h-screen bg-gray-50 pt-28 px-10">
 
         {/* Header */}
-        <div className="flex items-center gap-6 mb-8">
+        <div className="flex items-center gap-6 mb-8 font-poppins">
           <h1 className="text-2xl font-semibold text-blue-900">category name</h1>
           <div className="flex-1 h-px bg-gray-300" />
         </div>

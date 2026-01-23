@@ -13,7 +13,7 @@ const products = [
     category: "Transmitters",
     condition: "Brand New",
     description: "Danfoss Pressure Transmitter, MBS 3050.",
-    images: ["/products/w1209.png", "/products/w1209.png", "/products/w1209.png"]
+    images: ["/rspro.jpg", "/products/w1209.png", "/products/w1209.png"]
   },
 ];
 
@@ -27,7 +27,7 @@ export default function ProductDetail() {
     <>
       <Navbar />
 
-      <div className="max-w-6xl mx-auto pt-32 px-10 grid grid-cols-2 gap-10">
+      <div className="max-w-6xl mx-auto pt-32 px-10 grid grid-cols-2 gap-10 mt-10">
 
         {/* Images */}
         <div>
@@ -54,7 +54,7 @@ export default function ProductDetail() {
             <li><b>Technical Description:</b> {product.description}</li>
           </ul>
 
-          <h2 className="text-4xl font-bold mt-8">{product.price}</h2>
+          <h2 className="text-4xl font-bold mt-8 text-blue-800">{product.price}</h2>
 
           <div className="flex items-center gap-3 mt-6">
             <button className="border px-4 py-2 rounded-lg">-</button>
@@ -62,7 +62,7 @@ export default function ProductDetail() {
             <button className="border px-4 py-2 rounded-lg">+</button>
           </div>
 
-          <div className="flex gap-4 mt-8">
+          <div className="flex gap-4 mt-8 mb-4">
             <button className="bg-orange-500 text-white px-8 py-3 rounded-xl">Buy Now</button>
             <button className="bg-blue-900 text-white px-8 py-3 rounded-xl">Add to Cart</button>
           </div>
